@@ -135,7 +135,7 @@ function goBack() {
 }
 
 .store-image {
-    width: 200px;
+    width: 300px;
     height: auto;
     margin-top: 20px;
 }
