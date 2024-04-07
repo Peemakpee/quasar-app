@@ -17,17 +17,17 @@
                             <div class="form-group">
                                 <label for="storeName">Store Name<span class="required">*</span></label>
                                 <q-input outlined v-model="storeName" id="storeName" required dense
-                                    style="width: 300px; height: 60px;" />
+                                    style="width: 300px; height: 43px; border: 2px solid #dd9c11; border-radius: 6px; margin-bottom: 15px" />
                             </div>
                             <div class="form-group">
                                 <label for="email">Email Address<span class="required">*</span></label>
                                 <q-input outlined v-model="email" id="email" type="email" required dense
-                                    style="width: 300px; height: 60px; height: 60px;" />
+                                    style="width: 300px; height: 43px; border: 2px solid #dd9c11; border-radius: 6px; margin-bottom: 15px" />
                             </div>
                             <div class="form-group">
                                 <label for="phoneNumber">Phone Number<span class="required">*</span></label>
                                 <q-input outlined v-model="phoneNumber" id="phoneNumber" type="tel" required dense
-                                    style="width: 300px; height: 60px;" />
+                                    style="width: 300px; height: 43px; border: 2px solid #dd9c11; border-radius: 6px; margin-bottom: 15px" />
                             </div>
                         </div>
 
@@ -35,10 +35,18 @@
                         <div style="margin-left: 50px;">
                             <div class="fit column wrap justify-start items-start content-start">
                                 <label for="storeImage">Store Image (Optional)</label>
-                                <input style="margin-top: 10px;" type="file" @change="onFileChange" id="storeImage"
-                                    accept="image/*" />
+                                <!-- Wrap the drop-zone div in a label -->
+                                <label class="drop-zone" for="storeImageInput" @drop="handleDrop" @dragover.prevent>
+                                    <!-- Content of the drop-zone -->
+                                    <img v-if="storeImagePreview" :src="storeImagePreview" style="max-width: 100%; max-height: 100%;" />
+                                    <span v-else>Drop image here or click to upload</span>
+                                    <!-- File input field -->
+                                    <input type="file" id="storeImageInput" @change="onFileChange" accept="image/*"
+                                        style="display: none;" />
+                                </label>
                             </div>
                         </div>
+
 
                     </div>
 
@@ -50,31 +58,33 @@
                             <div class="form-group">
                                 <label for="province">Province<span class="required">*</span></label>
                                 <q-select outlined v-model="province" id="province" :options="provinces" required dense
-                                    style="width: 300px; height: 60px;" />
+                                    style="width: 300px; height: 43px; border: 2px solid #dd9c11; border-radius: 6px; margin-bottom: 15px" />
                             </div>
                             <div class="form-group">
                                 <label for="city">City/Municipality<span class="required">*</span></label>
                                 <q-select outlined v-model="city" id="city" :options="cities" required dense
-                                    style="width: 300px; height: 60px;" />
+                                    style="width: 300px; height: 43px; border: 2px solid #dd9c11; border-radius: 6px; margin-bottom: 15px" />
                             </div>
                             <div class="form-group">
                                 <label for="barangay">Barangay<span class="required">*</span></label>
                                 <q-select outlined v-model="barangay" id="barangay" :options="barangays" required dense
-                                    style="width: 300px; height: 60px;" />
+                                    style="width: 300px; height: 43px; border: 2px solid #dd9c11; border-radius: 6px; margin-bottom: 15px" />
                             </div>
                             <div class="form-group">
                                 <label for="streetBuilding">Street/Building (Optional)</label>
                                 <q-input outlined v-model="streetBuilding" id="streetBuilding" dense
-                                    style="width: 300px; height: 60px;" />
+                                    style="width: 300px; height: 43px; border: 2px solid #dd9c11; border-radius: 6px; margin-bottom: 15px" />
                             </div>
                             <div class="form-group">
                                 <label for="postalCode">Postal Code (Optional)</label>
-                                <q-input outlined v-model="postalCode" id="postalCode" dense style="width: 300px; height: 60px;" />
+                                <q-input outlined v-model="postalCode" id="postalCode" dense
+                                    style="width: 300px; height: 43px; border: 2px solid #dd9c11; border-radius: 6px; margin-bottom: 15px" />
                             </div>
                         </div>
                     </div>
                     <div style="margin-top: 10px; margin-left: 800px;">
-                        <q-btn type="submit" unelevated rounded color="primary" label="Add Store" style="width: 95px; font-size: 11px;" />
+                        <q-btn type="submit" unelevated rounded color="primary" label="Add Store"
+                            style="width: 95px; font-size: 11px;" />
 
                     </div>
                 </form>
@@ -91,6 +101,7 @@ const storeName = ref('');
 const email = ref('');
 const phoneNumber = ref('');
 const storeImage = ref(null);
+const storeImagePreview = ref(null); // Variable to hold the preview of the selected image
 const province = ref('');
 const city = ref('');
 const barangay = ref('');
@@ -121,18 +132,36 @@ const onFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
         storeImage.value = file;
+        const reader = new FileReader();
+        reader.onload = () => {
+            storeImagePreview.value = reader.result; // Set the preview of the selected image
+        };
+        reader.readAsDataURL(file);
     } else {
         storeImage.value = null;
+        storeImagePreview.value = null; // Clear the preview if no file selected
     }
 };
 
 function goBack() {
     window.location.reload();
 }
+
+function handleDrop(event) {
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
+    if (file) {
+        storeImage.value = file;
+        const reader = new FileReader();
+        reader.onload = () => {
+            storeImagePreview.value = reader.result; // Set the preview of the dropped image
+        };
+        reader.readAsDataURL(file);
+    }
+}
 </script>
 
 <style scoped>
-
 .page-title {
     color: #999;
     /* Gray out the text */
@@ -168,7 +197,7 @@ function goBack() {
     /* Define the color and style of the divider */
     width: calc(100% + 100px);
     margin-left: 10px;
- 
+
 }
 
 .title {
@@ -177,5 +206,18 @@ function goBack() {
     font-size: 18px;
     margin-top: 40px;
     margin-left: 10px;
+}
+
+.drop-zone {
+    width: 300px;
+    height: 100px;
+    border: 2px dashed #dd9c11;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 10px;
+    /* Adjust the border radius as needed */
 }
 </style>
