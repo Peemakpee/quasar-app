@@ -1,13 +1,10 @@
 <template>
   <q-page class="flex flex-start">
-
     <q-card class="q-mb-md"
       style="max-width: 500px; min-width: 390px; margin-bottom: 0px; margin-top: 70px; margin-left: 20px;">
-
       <q-card-section>
         <q-card-title style="font-weight: 400; font-size: 20px;">Menu</q-card-title>
         <q-card-main>
-          <!-- Card 1 content -->
         </q-card-main>
       </q-card-section>
     </q-card>

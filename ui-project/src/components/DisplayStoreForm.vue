@@ -109,14 +109,12 @@ function goBack() {
 
 .page-title {
     color: #999;
-    /* Gray out the text */
     font-weight: bold;
     font-size: 18px;
 }
 
 .add-store {
     color: #9d7204;
-    /* Dark orange color */
 }
 
 .back-button {
@@ -128,16 +126,12 @@ function goBack() {
     margin-top: 5px;
     border: none;
     border-top: 1px solid #000000;
-    /* Define the color and style of the divider */
     width: calc(100% + 200px);
     margin-left: 10px;
-    /* Set a specific width for the divider */
-    /* Subtract 10px from 100% to cut a bit from the right side */
 }
 
 .store-image-section {
     text-align: right;
-    /* Align the store image to the right */
 }
 
 .store-image {
@@ -153,17 +147,14 @@ function goBack() {
 
 .label {
     flex: 0 0 150px;
-    /* Set a fixed width for the labels */
     margin-bottom: 20px;
     margin-left: 10px;
 }
 
 .value {
     flex: 1;
-    /* Allow the values to fill the remaining space */
     margin-left: 20px;
     margin-bottom: 20px;
     white-space: nowrap;
 }
-
 </style>

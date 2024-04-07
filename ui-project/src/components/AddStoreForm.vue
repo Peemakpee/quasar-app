@@ -30,17 +30,13 @@
                                     style="width: 300px; height: 43px; border: 2px solid #dd9c11; border-radius: 6px; margin-bottom: 15px" />
                             </div>
                         </div>
-
-
                         <div style="margin-left: 50px;">
                             <div class="fit column wrap justify-start items-start content-start">
                                 <label for="storeImage">Store Image (Optional)</label>
-                                <!-- Wrap the drop-zone div in a label -->
                                 <label class="drop-zone" for="storeImageInput" @drop="handleDrop" @dragover.prevent>
-                                    <!-- Content of the drop-zone -->
-                                    <img v-if="storeImagePreview" :src="storeImagePreview" style="max-width: 100%; max-height: 100%;" />
+                                    <img v-if="storeImagePreview" :src="storeImagePreview"
+                                        style="max-width: 100%; max-height: 100%;" />
                                     <span v-else>Drop image here or click to upload</span>
-                                    <!-- File input field -->
                                     <input type="file" id="storeImageInput" @change="onFileChange" accept="image/*"
                                         style="display: none;" />
                                 </label>
@@ -85,10 +81,8 @@
                     <div style="margin-top: 10px; margin-left: 800px;">
                         <q-btn type="submit" unelevated rounded color="primary" label="Add Store"
                             style="width: 95px; font-size: 11px;" />
-
                     </div>
                 </form>
-
             </q-card-main>
         </q-card-section>
     </q-card>
@@ -101,19 +95,17 @@ const storeName = ref('');
 const email = ref('');
 const phoneNumber = ref('');
 const storeImage = ref(null);
-const storeImagePreview = ref(null); // Variable to hold the preview of the selected image
+const storeImagePreview = ref(null);
 const province = ref('');
 const city = ref('');
 const barangay = ref('');
 const streetBuilding = ref('');
 const postalCode = ref('');
-const provinces = ref(['Province 1', 'Province 2', 'Province 3']); // Sample provinces
-const cities = ref(['City 1', 'City 2', 'City 3']); // Sample cities
-const barangays = ref(['Barangay 1', 'Barangay 2', 'Barangay 3']); // Sample barangays
+const provinces = ref(['Province 1', 'Province 2', 'Province 3']);
+const cities = ref(['City 1', 'City 2', 'City 3']);
+const barangays = ref(['Barangay 1', 'Barangay 2', 'Barangay 3']);
 
 const submitForm = () => {
-    // Store form data in local storage
-
     const formData = {
         storeName: storeName.value,
         email: email.value,
@@ -134,12 +126,12 @@ const onFileChange = (e) => {
         storeImage.value = file;
         const reader = new FileReader();
         reader.onload = () => {
-            storeImagePreview.value = reader.result; // Set the preview of the selected image
+            storeImagePreview.value = reader.result;
         };
         reader.readAsDataURL(file);
     } else {
         storeImage.value = null;
-        storeImagePreview.value = null; // Clear the preview if no file selected
+        storeImagePreview.value = null;
     }
 };
 
@@ -154,7 +146,7 @@ function handleDrop(event) {
         storeImage.value = file;
         const reader = new FileReader();
         reader.onload = () => {
-            storeImagePreview.value = reader.result; // Set the preview of the dropped image
+            storeImagePreview.value = reader.result;
         };
         reader.readAsDataURL(file);
     }
@@ -164,7 +156,6 @@ function handleDrop(event) {
 <style scoped>
 .page-title {
     color: #999;
-    /* Gray out the text */
     font-weight: bold;
     font-size: 18px;
 }
@@ -179,13 +170,11 @@ function handleDrop(event) {
 
 .back-button {
     margin-left: -20px;
-    /* Adjust the margin to move the button to the left */
     margin-right: -8px;
 }
 
 .label {
     flex: 0 0 150px;
-    /* Set a fixed width for the labels */
     margin-bottom: 20px;
     margin-left: 10px;
 }
@@ -194,7 +183,6 @@ function handleDrop(event) {
     margin-top: 5px;
     border: none;
     border-top: 1px solid #000000;
-    /* Define the color and style of the divider */
     width: calc(100% + 100px);
     margin-left: 10px;
 
@@ -218,6 +206,5 @@ function handleDrop(event) {
     cursor: pointer;
     margin-top: 10px;
     border-radius: 10px;
-    /* Adjust the border radius as needed */
 }
 </style>

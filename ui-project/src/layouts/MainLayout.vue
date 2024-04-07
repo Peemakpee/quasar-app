@@ -1,8 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="gray-background">
-    <!-- Search bar -->
-
-
+ 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered side="left">
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
@@ -16,12 +14,10 @@
       </q-list>
     </q-drawer>
 
-
     <q-page-container :class="leftDrawerOpen ? '' : 'left-margin'">
 
       <router-view />
-      <!-- Search bar -->
-
+  
     </q-page-container>
 
     <q-card v-if="!leftDrawerOpen"
@@ -41,7 +37,6 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
 
 defineOptions({
   name: 'MainLayout'
@@ -50,7 +45,7 @@ defineOptions({
 const leftDrawerOpen = ref(false)
 
 onMounted(() => {
-  leftDrawerOpen.value = false; // Close the drawer when the component is mounted
+  leftDrawerOpen.value = false;
 })
 
 function toggleLeftDrawer() {
@@ -71,6 +66,5 @@ const drawerItems = [
 
 .left-margin {
   margin-left: 80px;
-  /* Match the width of your q-card */
 }
 </style>
